@@ -4,36 +4,48 @@ public class Mane {
 
     public static void main(String[] args) {
 
-        int num =200;
+        int num = 200;
         Show sh = new Show(num, "冒泡排序");
         bubble_sort(sh);
         System.out.println(sh.getSortName() + ":" + sh.getTimes());
-        System.out.println((sh.ok() ? " 排序成功" : " 排序错误"));
+        System.out.println((sh.ok() ? "排序成功" : "排序错误"));
         sh.setVisible(false);
 
         sh = new Show(num, "鸡尾酒排序");
         cocktail_sort(sh);
         System.out.println(sh.getSortName() + ":" + sh.getTimes());
-        System.out.println((sh.ok() ? " 排序成功" : " 排序错误"));
+        System.out.println((sh.ok() ? "排序成功" : "排序错误"));
         sh.setVisible(false);
 
         sh = new Show(num, "插入排序");
         insert_sort(sh);
         System.out.println(sh.getSortName() + ":" + sh.getTimes());
-        System.out.println((sh.ok() ? " 排序成功" : " 排序错误"));
+        System.out.println((sh.ok() ? "排序成功" : "排序错误"));
         sh.setVisible(false);
 
         sh = new Show(num, "选择排序");
         select_sort(sh);
         System.out.println(sh.getSortName() + ":" + sh.getTimes());
-        System.out.println((sh.ok() ? " 排序成功" : " 排序错误"));
+        System.out.println((sh.ok() ? "排序成功" : "排序错误"));
         sh.setVisible(false);
 
         sh = new Show(num, "快速排序");
-        quick_sort(sh);
+        quick_sort(sh,0,sh.length()-1);
         System.out.println(sh.getSortName() + ":" + sh.getTimes());
-        System.out.println((sh.ok() ? " 排序成功" : " 排序错误"));
+        System.out.println((sh.ok() ? "排序成功" : "排序错误"));
         sh.setVisible(false);
+
+        // sh = new Show(num, "二分排序");
+        // binary_sort(sh);
+        // System.out.println(sh.getSortName() + ":" + sh.getTimes());
+        // System.out.println((sh.ok() ? "排序成功" : "排序错误"));
+        // sh.setVisible(false);
+
+        // sh = new Show(num, "希尔排序");
+        // shell_sort(sh);
+        // System.out.println(sh.getSortName() + ":" + sh.getTimes());
+        // System.out.println((sh.ok() ? "排序成功" : "排序错误"));
+        // sh.setVisible(false);
     }
 
     public static void bubble_sort(Show s){
@@ -102,25 +114,28 @@ public class Mane {
         int j = end;
         int sentinel = start;
 
-        while (i != j) {
-            while (s.get(j) >= s.get(sentinel) && i < j) {
-                j--;
-            }
-            while (s.get(i) <= s.get(sentinel) && i < j) {
-                i++;
-            }
-            if (i < j) {
-                int temp = s.get(i);
-                s.set(i, s.get(j));
-                s.set(j, temp);
-            }
-        }
+        if (start < end) {
+          while (i < j) {
+              while (s.get(j) >= s.get(sentinel) && i < j) {
+                  j--;
+              }
+              while (s.get(i) <= s.get(sentinel) && i < j) {
+                  i++;
+              }
+              if (i < j) {
+                  int temp = s.get(i);
+                  s.set(i, s.get(j));
+                  s.set(j, temp);
+              }
+          }
 
-        int temp = s.get(sentinel);
-        s.set(sentinel, s.get(i));
-        s.set(i, temp);
+          int temp = s.get(sentinel);
+          s.set(sentinel, s.get(i));
+          s.set(i, temp);
 
-        quick_sort(s, start, i-1);
-        quick_sort(s, i+1, end);
+          quick_sort(s, start, i-1);
+          quick_sort(s, i+1, end);
+      }
     }
+
 }
